@@ -1,2 +1,2 @@
-ntroduction to Python programming. 
+Introduction to Python programming. 
 Let's have fun...
