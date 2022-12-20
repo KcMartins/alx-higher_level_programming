@@ -1,62 +1,94 @@
 #!/usr/bin/python3
-"""class Square that defines a square"""
+"""This module contains a class that defines a square.
+In the Square class we initialize each object by the
+__init__ method with a private instance variable called
+__size that takes the size variable's value passed as
+argument. Also checks if the size arg has a valid value.
+"""
 
 
 class Square:
-    """class Square that defines a square"""
-
+    """ Class Square with constuctor method"""
     def __init__(self, size=0, position=(0, 0)):
-        """Instantiation with optional size and position"""
-        if not type(size) is int:
+        """Initializes the class Square
+        Arg
+            size: size to initializate __size
+        """
+        if type(size) != int:
             raise TypeError("size must be an integer")
         elif size < 0:
             raise ValueError("size must be >= 0")
-        elif not type(position) is tuple or len(position) != 2:
-            raise TypeError("position must be a tuple of 2 positive integers")
-        elif (not type(position[0]) is int) or (not type(position[1]) is int):
-            raise TypeError("position must be a tuple of 2 positive integers")
-        elif position[0] < 0 or position[1] < 0:
-            raise TypeError("position must be a tuple of 2 positive integers")
         else:
             self.__size = size
-            self.__position = position
 
-    @property
-    def size(self):
-        """property to retrieve it"""
-        return self.__size
+        if type(position) != tuple or len(position) != 2:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        if type(position[0]) != int or type(position[1]) != int:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        if position[0] < 0 or position[1] < 0:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        self.__position = position
 
-    @size.setter
-    def size(self, value):
-        """property setter to set it"""
-        self.__size = value
+    def area(self):
+        """
+        Calculate the area of a square
+        Returns:
+            The area of the square
+        """
+        return self.__size ** 2
+
+    def my_print(self):
+        """
+        Print the square checking position
+        """
+
+        if self.size == 0:
+            print("")
+        else:
+            print("\n" * self.__position[1], end="")
+            for i in range(self.__size):
+                print(" " * self.__position[0], end="")
+                for i in range(self.__size):
+                    print("#", end="")
+                print("")
 
     @property
     def position(self):
-        """property to retrieve it"""
+        """
+        getter function of position
+        Returns:
+            position of square
+        """
         return self.__position
 
     @position.setter
-    def position(self, value):
-        """property setter to set it"""
-        self.__position = value
+    def position(self, position):
+        if type(position) != tuple or len(position) != 2:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        if type(position[0]) != int or type(position[1]) != int:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        if position[0] < 0 or position[1] < 0:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        self.__position = position
 
-    def area(self):
-        """Public instance that returns the  square area"""
-        return self.__size * self.__size
+    @property
+    def size(self):
+        """
+        getter function of size
+        Returns:
+            size of square
+        """
+        return self.__size
 
-    def my_print(self):
-        """Public instance that prints the square with the char #"""
-        if self.__size == 0:
-            print("")
-            return
-        if self.__position[1] > 0:
-            for l in range(0, self.__position[1]):
-                print("")
-        for i in range(0, self.__size):
-            if self.__position[0] > 0:
-                for k in range(0, self.__position[0]):
-                    print(" ", end="")
-            for j in range(0, self.__size):
-                print("#", end="")
-            print("")
+    @size.setter
+    def size(self, val):
+        """
+        setter function of attribute size
+        Args:
+            value: value for __size
+        """
+        if type(val) is not int:
+            raise TypeError("size must be an integer")
+        if val < 0:
+            raise ValueError("size must be >= 0")
+        self.__size = val
