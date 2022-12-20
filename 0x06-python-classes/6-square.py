@@ -1,22 +1,56 @@
 #!/usr/bin/python3
-Square = __import__('6-square').Square
+class Square:
+    def __init__(self, size=0, position=(0, 0)):
+        self.size = size
+        self.position = position
 
-my_square_1 = Square(3)
-my_square_1.my_print()
+    # Size property
+    @property
+    def size(self):
+        return self.__size
 
-print("--")
+    # Size setter modifies
+    @size.setter
+    def size(self, value):
+        if type(value) != int:
+            raise TypeError('size must be an integer')
+        elif value < 0:
+            raise ValueError('size must be >= 0')
+        else:
+            self.__size = value
 
-my_square_2 = Square(3, (1, 3))
-my_square_2.my_print()
+    # Position property
+    @property
+    def position(self):
+        return self.__position
 
-print("--")
+    # Position setter modifies
+    @position.setter
+    def position(self, value):
+        message = 'position must be a tuple of 2 positive integers'
+        if type(value) != tuple or len(value) != 2:
+            raise TypeError(message)
 
-my_square_3 = Square(3, (3, 0))
-my_square_3.my_print()
+        for items in value:
+            if type(items) != int or items < 0:
+                raise TypeError(message)
 
-print("--")
+        self.__position = value
 
-#my_square_1 = Square(3, tuple())
-#my_square_1.my_print()
+    # Functions
+    def area(self):
+        return self.__size ** 2
 
-print("--")
+    def my_print(self):
+        size = self.__size
+        nl = self.__position[1]
+        ws = self.__position[0]
+
+        if size == 0:
+            print()
+
+        for newlines in range(nl):
+            print()
+
+        for row in range(size):
+            print((' ' * ws) + ('#' * size))
